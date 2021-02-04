@@ -1,0 +1,5 @@
+# See Local GIT Ignore settings
+
+
+# dependencies
+/node_modules
