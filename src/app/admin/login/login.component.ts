@@ -29,57 +29,39 @@ export class LoginComponent implements OnInit {
         private tokenData: LoginToken,
         private spinnerService: Ng4LoadingSpinnerService,
         private _authServ: AuthService) {
-            // this.pathObj    =   new Path();
         }
 
     ngOnInit() {
     }
-
     login() {
         this.loading = true;
         this.spinnerService = new Ng4LoadingSpinnerService();
-        this.spinnerService.show();
-
-        setTimeout(() => {
-            this.tokenData.token     =   'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6IkpvaG4gRG9lIiwiaWF0IjoxNTE2MjM5MDIyfQ.SflKxwRJSMeKKF2QT4fwpMeJf36POk6yJV_adQssw5c';
-            this.tokenData.userId    =   2;
-            this.tokenData.userData  =   {
-                email: "das.abhishek77@gmail.com",
-                id: 2
-            };
-            localStorage.setItem('loginToken', JSON.stringify(this.tokenData));
-            this.router.navigateByUrl('admin/dashboard');
-                        this.spinnerService.hide();
-        }, 5000)
-
-
-    //     this._authServ.login(this.model.username, this.model.password)
-    //         .subscribe(
-    //         data => {
-    //                 console.log('#### login response...');
-    //                 console.log(data);
-    //                 const response = data;
-    //         if (response !== undefined && response.status) {
-    //                     this.loading = false;
-    //                     this.router.navigated = false;
-    //                     // Check secure login token :: JWT
-    //                     if (response.loginToken !== undefined && response.loginToken !== null) {
-    //                         // this.tokenService.addToken(data.loginToken);
-    //                         this.tokenData.token     =   response.loginToken;
-    //                         this.tokenData.userId    =   response.user_id;
-    //                         this.tokenData.userData  =   data;
-    //                         // this.pathObj.adminLoginStatus   =   true;
-    //                         localStorage.setItem('loginToken', JSON.stringify(this.tokenData));
-    //                     }
-    //                     // alert('from login: '+this.pathObj.adminLoginStatus);
-    //                     this.router.navigateByUrl('admin/dashboard');
-    //                     this.spinnerService.hide();
-    //   }
-    //   if (!data.status) {
-    //       this.spinnerService.hide();
-    //       this.flashMessage.show(data.message, { cssClass: 'alert-danger', timeout: 700 });
-    //       this.loading = false;
-    //   }
-    //   });
+        this._authServ.login(this.model.email, this.model.password)
+            .subscribe(
+            data => {
+                    console.log('#### login response...');
+                    console.log(data);
+                    const response = data;
+            if (response !== undefined && response.status) {
+                        this.loading = false;
+                        this.router.navigated = false;
+                        // Check secure login token :: JWT
+                        if (response.authToken !== undefined && response.authToken !== null) {
+                            this.tokenData.token     =   response.authToken;
+                            localStorage.setItem('loginToken', response.authToken);
+                        }
+                        this.spinnerService.show();
+                        setTimeout(()=>{
+                            this.router.navigateByUrl('admin/dashboard');
+                            this.spinnerService.hide();
+                        },500)
+                        
+      }
+      if (!data.status) {
+          this.spinnerService.hide();
+          this.flashMessage.show(data.message, { cssClass: 'alert-danger', timeout: 5000 });
+          this.loading = false;
+      }
+      });
     }
 }

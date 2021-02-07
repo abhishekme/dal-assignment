@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import {MatDialog} from '@angular/material/dialog';
+import {} from '../../order-entry/order-entry.component'
 
 @Component({
   selector: 'app-dashboard-home',

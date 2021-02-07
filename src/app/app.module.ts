@@ -38,6 +38,7 @@ import {
   MatButtonModule, MatCardModule, MatDialogModule, MatInputModule, MatTableModule,
   MatToolbarModule, MatMenuModule,MatIconModule, MatProgressSpinnerModule
 } from '@angular/material';
+import { OrderEntryComponent } from './admin/order-entry/order-entry.component';
 
 
 
@@ -57,6 +58,7 @@ import {
     DynaFormComponent,
     FrontComponent,
     HomeComponent,
+    OrderEntryComponent,
   ],
   imports: [
     MatToolbarModule,

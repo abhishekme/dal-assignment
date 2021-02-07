@@ -3,7 +3,7 @@ import { Observable } from 'rxjs/Observable';
 import 'rxjs/add/operator/map';
 
 import { Http, Response, Headers, RequestOptions, URLSearchParams } from '@angular/http';
-
+import { HttpClient, HttpHeaders  } from "@angular/common/http";
 import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/catch';
 import 'rxjs/add/operator/toPromise';
@@ -26,6 +26,7 @@ export class UserServiceService {
     options: RequestOptions;
 
     constructor(private http: Http,
+        private _http: HttpClient,
                 private router: Router,
                 private _authServ: AuthService) {
         this.headers = new Headers({ 'Content-Type': 'application/json'});
@@ -100,6 +101,14 @@ adminGetStateByCountry(countryId : any) {
         });
     }
 
+    getAuthHeaders(){
+        let header = {
+          headers: new HttpHeaders()
+            .set('authorization',  `Bearer ${this._authServ.getLoginToken()}`)
+        }
+        return header;
+      }
+
     adminUserList(pageNum: any, limitNum: any, srchKey: any, queryType: any, sortByField: any, sortByDir: any) {
         this.actionUrl  =   this.Server + 'user-list-record';
         const getToken    =   this._authServ.getLoginToken();
@@ -108,6 +117,14 @@ adminGetStateByCountry(countryId : any) {
          return this.http.post(this.actionUrl, { limitNum: limitNum, pageNum: pageNum, srchKey: srchKey, queryType: queryType,
                                                  token: getToken, sortByField: sortByField, sortByDir: sortByDir}, this.options)
         .map(res => res.json());
+    }
+
+    adminProductList(pageNum: any, limitNum: any) {
+        this.actionUrl  =   this.Server + 'product?limit='+limitNum+'&page='+pageNum;
+        const getToken    =   this._authServ.getLoginToken();
+        console.log('----header request-----');
+        console.log(this.options);
+         return this._http.get(this.actionUrl, this.getAuthHeaders());
     }
 
     adminUserEdit(editId: number = 0) {

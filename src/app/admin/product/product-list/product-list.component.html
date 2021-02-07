@@ -1,0 +1,95 @@
+
+  <div class="wrapper">
+    <!-- INCLUDE SIDEBAR -->
+    <app-sidebar></app-sidebar>
+<div class="main-panel">
+    <!-- INCLUDE SIDEBAR -->
+    <app-header></app-header>
+      <div class="content">
+        <div class="container-fluid">
+          <flash-messages></flash-messages>
+          <span class="slds-notify_container">
+            <simple-notifications></simple-notifications>
+        </span>
+          <div class="row">    
+              <!-- <div class="col-md-12" [ngStyle]="{'text-align':'right'}">
+                  <a routerLink="/admin/Products/add">
+                  <button type="button" class="btn ink-reaction btn-raised btn-primary">ADD NEW</button></a>
+              </div> -->
+            <div class="col-md-12">
+              <div class="card">
+                <div class="card-header card-header-primary">
+                  <h4 class="card-title">Product Management</h4>
+                  <p class="card-category">Listing</p>
+                </div>
+        
+                <div class="card-body">
+                  <div class="box">
+                    <div class="box-header with-border">
+                      <h3 class="box-title"></h3>
+                    </div>
+                    <!-- /.box-header -->
+                    <div class="table-responsive">
+                      <table class="table table-bordered">
+                        <tr>
+                          <th>Product ID</th>
+                  <th>
+                    <span>
+                    Productname
+                    </span> 
+                  </th>
+                  <th>
+                    <span>
+                    Price</span>                    
+                    </th>
+                  <th>Expiry</th>
+                        </tr>
+                        <tr *ngFor="let row of listData">
+                          <td>{{row.id}}</td>
+                          <td>{{row.prod_name}}</td>
+                          <td>                            
+                            {{row.prod_price}}</td>
+                          <td>{{row.prod_exp_date | date:'M/d/y'}}</td>
+                          
+                        </tr>
+                        <tr>
+                          <td colspan="5" *ngIf="listData.length == null || listData.length === 0">No Record(s) Found</td>
+                        </tr>
+                      </table>
+                    </div>
+                    <!-- /.box-body -->
+                    <div class="box-footer clearfix">
+                      
+                      <hr>
+                      <nav aria-label="Page navigation example">
+                        <ul class="pagination pg-blue">
+                          <li class="page-item" [ngClass]="{'disabled' : pageNum <= 1}">
+                            <a class="page-link" tabindex="-1" (click)="getListData((pageNum-1),limitNum, srchKey)">Previous</a>
+                          </li>
+                          <li *ngFor="let page of pagedGItems" class="page-item" [ngClass]="{'active': pageNum == page.val}">
+                            <a class="page-link" href="javascript:void(0)" (click)="getListData(page.val,limitNum, srchKey)" 
+                            *ngIf="page.val != '...'">{{page.val}}</a>
+                            <a class="page-link" href="javascript:void(0)" *ngIf="page.val == '...'">{{page.val}}</a>
+                        </li>
+
+                          <li class="page-item" [ngClass]="{'disabled' : pageNum >= (totalPages)}">
+                            <a class="page-link" (click)="getListData((pageNum+1),limitNum, srchKey)">Next</a>
+                          </li>
+                        </ul>
+                      </nav>
+                    </div>
+                  </div>
+                </div>
+        
+              </div>
+            </div>
+            
+          </div>
+        </div>
+      </div>
+    <!-- INCLUDE FOOTER -->
+    <app-footer></app-footer>
+</div>
+</div>
+
+

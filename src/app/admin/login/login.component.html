@@ -10,7 +10,7 @@
         <flash-messages></flash-messages>
       <form name="form" (ngSubmit)="f.form.valid && login()" #f="ngForm" novalidate>
           <div class="form-group has-feedback">
-              <input type="text" class="form-control" placeholder="Username" name="username" [(ngModel)]="model.username" #username="ngModel" required />
+              <input type="text" class="form-control" placeholder="Username" name="username" [(ngModel)]="model.email" #username="ngModel" required />
               <span class="glyphicon glyphicon-envelope form-control-feedback"></span>
               <label id="email-error" class="error" *ngIf="f.submitted && !username.valid"  for="username">Username is required</label>
 

@@ -16,7 +16,7 @@ export class AuthService {
 
   public Server = '';
   public ApiUrl = 'isAdminLogin';
-  public ApiUrlLogin  = 'auth/login';
+  public ApiUrlLogin  = 'login';
 
   public ServerWithApiUrl = '';
   public ServerWithApiUrlLogin = '';
@@ -37,8 +37,8 @@ export class AuthService {
       this.options = new RequestOptions({ headers: this.headers });
   }
 
-  login(username: string, password: string) {
-    return this.http.post<any>(this.ServerWithApiUrlLogin, { username: username, password: password }, { headers: this.headers })
+  login(email: string, password: string) {
+    return this.http.post<any>(this.ServerWithApiUrlLogin, { email: email, password: password }, { headers: this.headers })
         .map(user => {
           return user;
         });
@@ -52,8 +52,8 @@ export class AuthService {
   getLoginToken():string{
     let getToken 		=	'';
     if(localStorage.getItem('loginToken') != undefined){
-        let getTokenData 	=	JSON.parse(localStorage.getItem('loginToken'));
-        getToken 		      =	getTokenData.token;
+        let getTokenData 	=	(localStorage.getItem('loginToken'));
+        getToken 		      =	getTokenData;
     }
     return getToken;
   }

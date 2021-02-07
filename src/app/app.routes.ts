@@ -31,6 +31,15 @@ children: [
         ]
     },
     {
+        path: 'products',
+        children: [
+            {
+                path: '',
+                loadChildren: './admin/product/product.module#ProductModule'
+            }
+        ]
+    },
+    {
         path: 'users',
         children: [
             {
@@ -43,14 +52,5 @@ children: [
     { path: '**', redirectTo: 'login' }
 ],
 },
-{path: "home", component: HomeComponent},
-{
-  path: "home",
-  component: FrontComponent,
-  children:[
-    {path: "dyna-form", component: DynaFormComponent}
-  ]
-},
-
-{ path: '**', redirectTo: 'home' }
+{ path: '**', redirectTo: 'admin' }
 ];

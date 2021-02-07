@@ -50,13 +50,13 @@ state: RouterStateSnapshot): boolean {
 const getToken  = localStorage.getItem('loginToken');
 console.log(getToken);
   if (getToken != '' && getToken != null && getToken !== undefined )  {
-    const tokenObj 	= JSON.parse(JSON.stringify(getToken));
+    //const tokenObj 	= JSON.parse(JSON.stringify(getToken));
     if (getToken === '' || getToken === undefined) {
     return true;
     } else {
     
-    if (tokenObj !== '' || tokenObj === undefined) {
-        const thisToken = tokenObj.token;
+    if (getToken !== '' || getToken === undefined) {
+        const thisToken = getToken;//tokenObj.token;
         if (this.jwtHelper.isTokenExpired(thisToken)) {
         return true;
         }
