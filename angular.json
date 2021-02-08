@@ -23,7 +23,6 @@
               "src/assets"
             ],
             "styles": [
-              "./node_modules/ng6-toastr/bundles/ng2-toastr.min.css",
               "./src/styles.css",
               "./src/assets/css/bootstrap.css"
             ],

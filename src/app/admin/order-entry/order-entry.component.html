@@ -1,3 +1,63 @@
-<p>
-  order-entry works!
-</p>
+
+
+<div class="content">
+  <div class="container-fluid">
+    <flash-messages></flash-messages>
+    <div class="row">
+      <div class="col-md-12">
+        <div class="card">
+          <div class="card-header card-header-primary">
+            <h4 class="card-title"></h4>
+            <p class="card-category">Add Order</p>
+          </div>
+          <div class="card-body">
+              <div class="row">
+                  <div class="col-md-12">
+                    <div class="box box-primary">
+                      <form  novalidate #ngForm="ngForm" (keydown.enter)="$event.preventDefault()" (ngSubmit)="onSubmit(ngForm);" autocomplete="off">
+                        <div class="box-body col-md-6">
+                          <div class="form-group">
+                            <label>Order Date</label>&nbsp;<span class="err">*</span>                              
+                                <input class="form-control" 
+                                [matDatepicker]="order_date" id="order_date"  (click)="_service._openCalendar(order_date)"   
+                                placeholder="Order Date" name="order_date" [(ngModel)]="orderModel.order_date" required>
+                                <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+                                <mat-datepicker #order_date></mat-datepicker>
+                          </div>
+                          <div class="form-group">
+                            <label>Product</label>
+                            <input class="form-control form-control-sm w-100" #myInput  type="text" 
+                            (keyup)="searchProduct($event)" (keydown)="$event.stopPropagation()" autocomplete="off" placeholder="Search">
+                            <select  class="form-control" [(ngModel)]="orderModel.prod_id" name="country_id" 
+                                (ngModelChange)="updatePrice()">                            
+                              <option value="0">---SELECT Product---</option>
+                              <option *ngFor="let item of loadProductLists" value="{{item.id}}">{{item.prod_name}}</option>
+                            </select>
+                          </div>
+                          <div class="form-group">
+                            <label>Price</label>
+                              <span> {{selectPrice}} </span>
+                          </div>
+                          <div class="form-group">
+                            <label>Sale Price</label>
+                              <input type="text" class="form-control" name="last_name" minlength="3" 
+                              [(ngModel)]="orderModel.order_amount" (ngModelChange)="updateSalePrice()" autocomplete="off">
+                          </div>
+          
+                            {{orderModel | json}}
+                        </div>
+                        {{userModel | json}}
+                        <div class="box-footer">
+                          <button type="submit" class="btn btn-primary" >Submit</button>                          
+                        </div>
+                      </form>
+                    </div>
+                </div>
+              </div>
+          </div>
+  
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

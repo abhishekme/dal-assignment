@@ -133,10 +133,27 @@
                    </div>
                    <div class="col-md-4">
                      <span [ngStyle]="{'padding-left':'115px'}">
-                      New Order
+                       <a href="javascript:void(0)" (click)="openDialog()">
+                          New Order
+                      </a>
                      </span>
                      
                   </div>
+
+                  <ng-template #orderComp let-modal>
+                    <div class="main_pop">
+                        <div class="pop_close">
+                            <span class="icon-close" (click)="closeChecklistDialog()"></span>
+                        </div>
+                        <div class="pop_thanks">
+                            <h5>Thank you</h5>
+                            <p>Your Application has been submitted successfully and is under review. Please check the status and your dashboard for updates.</p>
+                            <button class="submit-bttn" (click)="closeChecklistDialog()" 
+                            routerLink="/dashboard/status/all">Return to Status</button>
+                        </div>
+                    </div>
+                </ng-template>
+
                   <div class="col-md-4">                     
                   </div>
                 </div>
@@ -395,36 +412,69 @@
                       <div class="card-body table-responsive">
                         <table class="table table-hover">
                           <thead class="text-warning">
-                            <th>ID</th>
-                            <th>Name</th>
-                            <th>Salary</th>
-                            <th>Country</th>
+                            <th>Product</th>
+                            <th>Quantity</th>
+                            <th>Total Amount($)</th>
                           </thead>
                           <tbody>
-                            <tr>
-                              <td>1</td>
-                              <td>Dakota Rice</td>
-                              <td>$36,738</td>
-                              <td>Niger</td>
-                            </tr>
-                            <tr>
-                              <td>2</td>
-                              <td>Minerva Hooper</td>
-                              <td>$23,789</td>
-                              <td>Curaçao</td>
-                            </tr>
-                            <tr>
-                              <td>3</td>
-                              <td>Sage Rodriguez</td>
-                              <td>$56,142</td>
-                              <td>Netherlands</td>
-                            </tr>
-                            <tr>
-                              <td>4</td>
-                              <td>Philip Chaney</td>
-                              <td>$38,735</td>
-                              <td>Korea, South</td>
-                            </tr>
+                            <ng-container *ngFor="let item of topSale; let i = index;">
+                              <tr>
+                                <td>{{item.prod_name}}</td>
+                                <td>{{item.totalQuantity}}</td>
+                                <td>{{item.totalAmount}}</td>
+                              </tr>
+                            </ng-container>                                                        
+                          </tbody>
+                        </table>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="col-lg-6 col-md-12">
+                    <div class="card">
+                      <div class="card-header card-header-warning">
+                        <h4 class="card-title">Sale in the last 3 months</h4>
+                        <p class="card-category"></p>
+                      </div>
+                      <div class="card-body table-responsive">
+                        <table class="table table-hover">
+                          <thead class="text-warning">
+                          </thead>
+                          <tbody>
+                            <ng-container *ngFor="let item of lastThreeMonth; let i = index;">
+                              <tr>
+                                <td><strong>
+                                  <p [innerHTML]="getMonth(item.Month)"></p></strong></td>
+                                <td>${{item.totalAmount}}</td>
+                              </tr>
+                            </ng-container>                                                        
+                          </tbody>
+                        </table>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="row">
+                  <div class="col-lg-6 col-md-12">
+                    <div class="card">
+                      <div class="card-header card-header-warning">
+                        <h4 class="card-title">High Vs Low</h4>
+                        <p class="card-category"></p>
+                      </div>
+                      <div class="card-body table-responsive">
+                        <table class="table table-hover">
+                          <thead class="text-warning">
+                            <th>Total sale till date</th>
+                            <th>Highest Selling Product</th>
+                            <th>Lowest Selling Product</th>
+                          </thead>
+                          <tbody>
+                            <ng-container *ngFor="let item of highSale; let i = index;">
+                              <tr>
+                                <td>$ {{item.totalSale}}</td>
+                                <td><strong><p [innerHTML]="item.highSale"></p></strong></td>
+                                <td><strong><p [innerHTML]="item.lowSale"></p></strong></td>
+                              </tr>
+                            </ng-container>                                                        
                           </tbody>
                         </table>
                       </div>

@@ -1,4 +1,4 @@
-import { NgModule } from '@angular/core';
+import { NgModule, NO_ERRORS_SCHEMA,CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
 import { ProductListComponent } from './product-list/product-list.component';
@@ -38,6 +38,10 @@ import { ToastrModule } from 'ng6-toastr-notifications';
     ProductListComponent,
     ProductComponent,
     //GridCreatorComponent,
+  ],
+  schemas: [
+    CUSTOM_ELEMENTS_SCHEMA,
+    NO_ERRORS_SCHEMA
   ],
   exports: [
     RouterModule

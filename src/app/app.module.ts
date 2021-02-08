@@ -1,5 +1,5 @@
 import { BrowserModule } from '@angular/platform-browser';
-import { NgModule } from '@angular/core';
+import { NgModule,NO_ERRORS_SCHEMA,CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 
 import { AppComponent } from './app.component';
 import { LayoutComponent } from './admin/layout/layout.component';
@@ -36,12 +36,16 @@ import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 
 import {
   MatButtonModule, MatCardModule, MatDialogModule, MatInputModule, MatTableModule,
-  MatToolbarModule, MatMenuModule,MatIconModule, MatProgressSpinnerModule
+  MatSelectModule,
+  MatToolbarModule, MatMenuModule,MatIconModule, MatProgressSpinnerModule,MatDatepickerModule
 } from '@angular/material';
+import { NgxMatSelectSearchModule } from 'ngx-mat-select-search';
+import {MatNativeDateModule} from '@angular/material';
+import { MatMomentDateModule } from "@angular/material-moment-adapter";
 import { OrderEntryComponent } from './admin/order-entry/order-entry.component';
-
-
-
+//import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+//import { ModalModule } from 'ngx-bootstrap/modal';
+import { SimpleModalModule } from 'ngx-simple-modal';
 
 
 
@@ -58,19 +62,26 @@ import { OrderEntryComponent } from './admin/order-entry/order-entry.component';
     DynaFormComponent,
     FrontComponent,
     HomeComponent,
+    
     OrderEntryComponent,
   ],
   imports: [
+    SimpleModalModule,
+    NgxMatSelectSearchModule,
+    MatSelectModule,
     MatToolbarModule,
-    
     MatButtonModule,
     MatCardModule,
-    MatInputModule,
     MatDialogModule,
     MatTableModule,
     MatMenuModule,
     MatIconModule,
     MatProgressSpinnerModule,
+    MatNativeDateModule,
+    MatMomentDateModule,
+    MatDatepickerModule,
+    
+    MatInputModule,
     PartialModule,
     BrowserModule,
     BrowserAnimationsModule,
@@ -89,6 +100,7 @@ import { OrderEntryComponent } from './admin/order-entry/order-entry.component';
     MatToolbarModule,
     MatButtonModule,
     MatCardModule,
+    MatDatepickerModule,
     MatInputModule,
     MatDialogModule,
     MatTableModule,
@@ -96,7 +108,14 @@ import { OrderEntryComponent } from './admin/order-entry/order-entry.component';
     MatIconModule,
     MatProgressSpinnerModule,
   ],
-  providers: [AuthGuard, AuthCheckService, AuthService],
+  entryComponents: [
+    OrderEntryComponent,    
+ ],
+ schemas: [
+  CUSTOM_ELEMENTS_SCHEMA,
+  NO_ERRORS_SCHEMA
+],
+  providers: [AuthGuard, AuthCheckService, AuthService, MatNativeDateModule],
   bootstrap: [AppComponent]
 })
 export class AppModule {

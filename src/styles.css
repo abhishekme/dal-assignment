@@ -5,3 +5,17 @@
 /* @import "assets/css/bootstrap.css"; */
 @import "https://fonts.googleapis.com/css?family=Roboto:300,400,500,700|Roboto+Slab:400,700|Material+Icons";
 @import "https://maxcdn.bootstrapcdn.com/font-awesome/latest/css/font-awesome.min.css";
+
+.mat-dialog-container{
+    background: azure !important;
+}
+.card-header{
+    background: brown !important;
+}
+.cdk-global-overlay-wrapper {
+    display: flex;
+    position: absolute;
+    z-index: 1000;
+    overflow: auto;
+    pointer-events: auto;  
+  }
